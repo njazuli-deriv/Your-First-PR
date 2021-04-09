@@ -1,8 +1,0 @@
-name: 'Auto-accept PR request'
-description: 'Automatically accept eligible pull requests'
-outputs:
-  success:
-    description: 'Whether the PR was accepted or not.'
-runs:
-  using: 'node12'
-  main: 'index.js'
