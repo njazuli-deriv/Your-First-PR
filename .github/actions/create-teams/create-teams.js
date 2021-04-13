@@ -12,8 +12,15 @@ const createTeams = async () => {
     const team_size = core.getInput("team_size");
 
     // Get existing teams
-    const teams_file = fs.readFileSync(teams_file_path);
-    const existing_teams = JSON.parse(teams_file).groups;
+    const teams_file_contents = fs.readFileSync(teams_file_path);
+    const existing_teams = JSON.parse(teams_file_contents).groups;
+
+    console.log({
+      json: teams_file_contents,
+      parsed: JSON.parse(teams_file_contents),
+      groups: JSON.parse(teams_file_contents).groups,
+    });
+
     const teams = fs
       .readdirSync(people_folder_path)
       // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
