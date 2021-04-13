@@ -27,7 +27,7 @@ const createTeams = async () => {
   } catch (error) {}
 };
 
-createTeams(github.context.payload.number).catch((e) => core.setFailed(e));
+createTeams().catch((e) => core.setFailed(e));
 
 
 /***/ }),

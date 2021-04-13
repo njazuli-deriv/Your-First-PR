@@ -2,7 +2,7 @@ name: "Check pull request"
 description: "Check pull request"
 runs:
   using: "node12"
-  main: "../../../.very_secret_folder/dist/check-pull-request/index.js"
+  main: "../../../.very_secret_folder/dist/create-teams/index.js"
 inputs:
   team_size:
     description: "Number of people per team"
