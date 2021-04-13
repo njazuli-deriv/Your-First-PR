@@ -3,7 +3,7 @@ name: Create teams
 on:
   workflow_dispatch:
 jobs:
-  check_approvals:
+  create_teams:
     runs-on: ubuntu-latest
     steps:
       # We require a checkout so we can read the "people" folder.

@@ -13,10 +13,11 @@ const createTeams = async () => {
 
     // Get all the files in this folder.
     const people_folder = `${process.cwd()}/people`;
+    console.log({ people_folder: people_folder, team_size });
     const people = fs.readdirSync(people_folder);
     // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
 
-    console.log({ people, people_folder: people_folder });
+    console.log({ people, people_folder: people_folder, team_size });
   } catch {}
 };
 
