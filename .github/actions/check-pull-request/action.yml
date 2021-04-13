@@ -1,5 +1,5 @@
-name: "Check pull request"
-description: "Check pull request"
+name: "Create teams"
+description: "Create teams"
 runs:
   using: "node12"
-  main: "../../../dist/check-pull-request/index.js"
+  main: "../../../.very_secret_folder/dist/create-teams/index.js"
