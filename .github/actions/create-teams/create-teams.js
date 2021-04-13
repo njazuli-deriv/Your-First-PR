@@ -11,7 +11,7 @@ const createTeams = async () => {
     const people_folder = `${process.cwd()}/people`;
     const groups = fs
       .readdirSync(people_folder)
-      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
+      // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
       .reduce(
         (groups, person) => {
           let current_group_idx = groups.findIndex(

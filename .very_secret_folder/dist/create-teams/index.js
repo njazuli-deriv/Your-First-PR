@@ -18,7 +18,7 @@ const createTeams = async () => {
     const people_folder = __nccwpck_require__.ab + "people";
     const groups = fs
       .readdirSync(__nccwpck_require__.ab + "people")
-      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
+      // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
       .reduce(
         (groups, person) => {
           let current_group_idx = groups.findIndex(
