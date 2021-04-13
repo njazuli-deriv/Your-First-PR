@@ -8,16 +8,17 @@ const fs = require("fs");
 const createTeams = async () => {
   try {
     const team_size = core.getInput("team_size");
-    const testFolder = ".";
 
     console.log({ cwd: process.cwd() });
 
-    fs.readdir(testFolder, (err, files) => {
-      files.forEach((file) => {
-        console.log(file);
-      });
-    });
-  } catch (error) {}
+    // Get all the files in this folder.
+    const people_folder = `${process.cwd()}/people`;
+    const people = fs
+      .readdirSync(people_folder)
+      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
+
+    console.log({ people });
+  } catch {}
 };
 
 createTeams().catch((e) => core.setFailed(e));
