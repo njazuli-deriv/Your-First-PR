@@ -20,10 +20,11 @@ const createTeams = async () => {
 
     // Get all the files in this folder.
     const people_folder = __nccwpck_require__.ab + "people";
+    console.log({ people_folder: __nccwpck_require__.ab + "people", team_size });
     const people = fs.readdirSync(__nccwpck_require__.ab + "people");
     // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
 
-    console.log({ people, people_folder: __nccwpck_require__.ab + "people" });
+    console.log({ people, people_folder: __nccwpck_require__.ab + "people", team_size });
   } catch {}
 };
 
