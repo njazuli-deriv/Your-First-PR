@@ -8,16 +8,33 @@ const fs = require("fs");
 const createTeams = async () => {
   try {
     const team_size = core.getInput("team_size");
-
-    console.log({ cwd: process.cwd() });
-
-    // Get all the files in this folder.
     const people_folder = `${process.cwd()}/people`;
-    console.log({ people_folder: people_folder, team_size });
-    const people = fs.readdirSync(people_folder);
-    // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
+    const groups = fs
+      .readdirSync(people_folder)
+      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
+      .reduce(
+        (groups, person) => {
+          let current_group_idx = groups.findIndex(
+            (group) => group.length < team_size
+          );
 
-    console.log({ people, people_folder: people_folder, team_size });
+          // If no available group, create a new one.
+          if (current_group_idx === -1) {
+            current_group_idx = groups.length;
+          }
+
+          // Add the person to this group.
+          groups[current_group_idx] = [
+            ...(groups[current_group_idx] ?? []),
+            person,
+          ];
+
+          return groups;
+        },
+        [[]]
+      );
+
+    console.log({ groups });
   } catch {}
 };
 
