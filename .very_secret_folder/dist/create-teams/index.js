@@ -20,14 +20,7 @@ const createTeams = async () => {
 
     // Get existing teams
     const teams_file_contents = fs.readFileSync(__nccwpck_require__.ab + "teams.json");
-    const existing_teams = JSON.parse(teams_file_contents).groups;
-
-    console.log({
-      json: teams_file_contents,
-      parsed: JSON.parse(teams_file_contents),
-      groups: JSON.parse(teams_file_contents).groups,
-    });
-
+    const existing_teams = JSON.parse(teams_file_contents).teams;
     const teams = fs
       .readdirSync(__nccwpck_require__.ab + "people")
       // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
