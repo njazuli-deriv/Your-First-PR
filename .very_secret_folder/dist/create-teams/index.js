@@ -46,7 +46,9 @@ const createTeams = async () => {
       }, existing_teams);
 
     console.log({ teams });
-  } catch {}
+  } catch (error) {
+    console.log({ error });
+  }
 };
 
 createTeams().catch((e) => core.setFailed(e));
