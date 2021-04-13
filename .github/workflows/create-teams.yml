@@ -1,7 +1,10 @@
 name: Create teams
 
 on:
-  workflow_dispatch:
+  workflow_dispatch
+  push:
+    branches:
+      - master
 jobs:
   create_teams:
     runs-on: ubuntu-latest
