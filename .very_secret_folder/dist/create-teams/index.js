@@ -15,16 +15,17 @@ const fs = __nccwpck_require__(747);
 const createTeams = async () => {
   try {
     const team_size = core.getInput("team_size");
-    const testFolder = ".";
 
     console.log({ cwd: process.cwd() });
 
-    fs.readdir(testFolder, (err, files) => {
-      files.forEach((file) => {
-        console.log(file);
-      });
-    });
-  } catch (error) {}
+    // Get all the files in this folder.
+    const people_folder = __nccwpck_require__.ab + "people";
+    const people = fs
+      .readdirSync(__nccwpck_require__.ab + "people")
+      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
+
+    console.log({ people });
+  } catch {}
 };
 
 createTeams().catch((e) => core.setFailed(e));
