@@ -14,36 +14,38 @@ const fs = __nccwpck_require__(747);
 
 const createTeams = async () => {
   try {
+    const people_folder_path = __nccwpck_require__.ab + "people";
+    const teams_file_path = __nccwpck_require__.ab + "teams.json";
     const team_size = core.getInput("team_size");
-    const people_folder = __nccwpck_require__.ab + "people";
-    const groups = fs
+
+    // Get existing teams
+    const teams_file = fs.readFileSync(__nccwpck_require__.ab + "teams.json");
+    const existing_teams = JSON.parse(teams_file).groups;
+    const teams = fs
       .readdirSync(__nccwpck_require__.ab + "people")
       // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
-      .reduce(
-        (groups, person) => {
-          let current_group_idx = groups.findIndex(
-            (group) => group.length < team_size
-          );
+      .reduce((teams, person) => {
+        let current_team_idx = teams.findIndex(
+          (team) => team.length < team_size
+        );
 
-          // If no available group, create a new one.
-          if (current_group_idx === -1) {
-            current_group_idx = groups.length;
-          }
+        // If no available team, create a new one.
+        if (current_team_idx === -1) {
+          current_team_idx = teams.length;
+        }
 
-          // Add the person to this group.
-          groups[current_group_idx] = [
-            ...(Array.isArray(groups[current_group_idx])
-              ? groups[current_group_idx]
-              : []),
-            person,
-          ];
+        // Add the person to this team.
+        teams[current_team_idx] = [
+          ...(Array.isArray(teams[current_team_idx])
+            ? teams[current_team_idx]
+            : []),
+          person,
+        ];
 
-          return groups;
-        },
-        [[]]
-      );
+        return teams;
+      }, existing_teams);
 
-    console.log({ groups });
+    console.log({ teams });
   } catch {}
 };
 
