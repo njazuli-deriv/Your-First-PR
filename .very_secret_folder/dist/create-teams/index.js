@@ -15,16 +15,33 @@ const fs = __nccwpck_require__(747);
 const createTeams = async () => {
   try {
     const team_size = core.getInput("team_size");
+    const people_folder = `${process.cwd()}/people`;
+    const groups = fs
+      .readdirSync(people_folder)
+      .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
+      .reduce(
+        (groups, person) => {
+          let current_group_idx = groups.findIndex(
+            (group) => group.length < team_size
+          );
 
-    console.log({ cwd: process.cwd() });
+          // If no available group, create a new one.
+          if (current_group_idx === -1) {
+            current_group_idx = groups.length;
+          }
 
-    // Get all the files in this folder.
-    const people_folder = __nccwpck_require__.ab + "people";
-    console.log({ people_folder: __nccwpck_require__.ab + "people", team_size });
-    const people = fs.readdirSync(__nccwpck_require__.ab + "people");
-    // .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME);
+          // Add the person to this group.
+          groups[current_group_idx] = [
+            ...(groups[current_group_idx] ?? []),
+            person,
+          ];
 
-    console.log({ people, people_folder: __nccwpck_require__.ab + "people", team_size });
+          return groups;
+        },
+        [[]]
+      );
+
+    console.log({ groups });
   } catch {}
 };
 
