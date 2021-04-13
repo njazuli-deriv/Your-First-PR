@@ -59,17 +59,16 @@ const createTeams = async () => {
     fs.writeFileSync(__nccwpck_require__.ab + "teams.json", JSON.stringify(teams, null, 4));
     console.log({ teams, new_names });
 
-    let commit_msg;
-
     if (new_names.length === 1) {
-      commit_msg = `feat: add ${new_names[0]} to teams.json`;
+      core.setOutput("commit_msg", `feat: add ${new_names[0]} to teams.json`);
     } else if (new_names.length > 1) {
       const first_names = new_names.slice(0, new_names.length).join(", ");
       const last_name = new_names[new_names.length - 1];
-      commit_msg = `feat: add ${first_names} and ${last_name} to teams.json`;
+      core.setOutput(
+        "commit_msg",
+        `feat: add ${first_names} and ${last_name} to teams.json`
+      );
     }
-
-    core.setOutput("commit_msg", commit_msg);
   } catch (error) {
     console.log({ error });
   }
