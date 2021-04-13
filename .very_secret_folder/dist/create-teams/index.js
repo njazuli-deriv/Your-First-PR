@@ -15,9 +15,9 @@ const fs = __nccwpck_require__(747);
 const createTeams = async () => {
   try {
     const team_size = core.getInput("team_size");
-    const people_folder = `${process.cwd()}/people`;
+    const people_folder = __nccwpck_require__.ab + "people";
     const groups = fs
-      .readdirSync(people_folder)
+      .readdirSync(__nccwpck_require__.ab + "people")
       .filter((person) => person !== GITHUB_ACTIONS_BOT_NAME)
       .reduce(
         (groups, person) => {
@@ -32,7 +32,9 @@ const createTeams = async () => {
 
           // Add the person to this group.
           groups[current_group_idx] = [
-            ...(groups[current_group_idx] ?? []),
+            ...(Array.isArray(groups[current_group_idx])
+              ? groups[current_group_idx]
+              : []),
             person,
           ];
 

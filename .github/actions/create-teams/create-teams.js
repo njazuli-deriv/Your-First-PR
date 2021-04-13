@@ -25,7 +25,9 @@ const createTeams = async () => {
 
           // Add the person to this group.
           groups[current_group_idx] = [
-            ...(groups[current_group_idx] ?? []),
+            ...(Array.isArray(groups[current_group_idx])
+              ? groups[current_group_idx]
+              : []),
             person,
           ];
 
