@@ -16,7 +16,7 @@ jobs:
           team_size: 5
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Merge updated teams to master
-        if: -z "${{ steps.create_teams.outputs.commit_msg }}"
+        if: -n "${{ steps.create_teams.outputs.commit_msg }}"
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
