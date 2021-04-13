@@ -20,7 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Merge updated teams to master
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
+          if [ -n "$(git status --porcelain)" ]; then
             echo "Found updated teams.json file, updating..."
             git config --global user.name "github-actions[bot]"
             git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"

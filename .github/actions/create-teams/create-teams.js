@@ -27,12 +27,12 @@ const createTeams = async () => {
     }, []);
 
     const teams = people.reduce((teams, person) => {
-      let current_team_idx = teams.findIndex((team) => team.length < team_size);
+      // Avoid duplicates, this won't ever happen unless someone
+      // tampers with the "teams.json" file outside of this action.
+      if (new_names.includes(person)) return teams;
 
-      // If no available team, create a new one.
-      if (current_team_idx === -1) {
-        current_team_idx = teams.length;
-      }
+      let current_team_idx = teams.findIndex((team) => team.length < team_size);
+      if (current_team_idx === -1) current_team_idx = teams.length; // If no available team, create a new one.
 
       // Add the person to this team.
       // (below should also remove duplicates (e.g. added through merge conflicts))
