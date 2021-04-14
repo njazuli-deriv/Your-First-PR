@@ -1,0 +1,14 @@
+name: Check approvals
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 1-11 * * 1-5" # UTC time.
+jobs:
+  check_approvals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use local check approvals action
+        uses: ./.github/actions/check-approvals
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

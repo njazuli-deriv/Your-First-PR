@@ -1,0 +1,33 @@
+name: Create teams
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  create_teams:
+    runs-on: ubuntu-latest
+    steps:
+      # We require a checkout so we can read the "people" folder.
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Use local create teams action
+        id: create_teams
+        uses: ./.github/actions/create-teams
+        with:
+          team_size: 5
+          total_people: 30
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Merge updated teams to master
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "Found updated teams.json file, updating..."
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .
+            git commit -m "${{ steps.create_teams.outputs.commit_msg }}"
+            git push -f
+          else
+            echo "Found no new teams.json file. Doing nothing."
+          fi
